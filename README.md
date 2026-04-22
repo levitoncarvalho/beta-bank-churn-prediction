@@ -129,9 +129,11 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Add dataset
+### 4. Download dataset
 
-Place `Churn.csv` inside the `data/` folder.
+Download the dataset and place it inside the `data/` folder:
+
+[![Download Dataset](https://img.shields.io/badge/Dataset-Download-blue?style=for-the-badge&logo=databricks&logoColor=white)](https://practicum-content.s3.us-west-1.amazonaws.com/datasets/Churn.csv)
 
 ### 5. Train the model
 
@@ -153,7 +155,7 @@ streamlit run app.py
 
 - 💼 LinkedIn: https://www.linkedin.com/in/levitoncarvalho/
 - 🐙 GitHub: https://github.com/carvalholevis
-- ✉️ Email: carvalholevis@icloud.com
+- ✉️ Email: carvalholevis@gmail.com
 
 ---
 
