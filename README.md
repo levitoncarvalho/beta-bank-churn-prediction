@@ -224,8 +224,8 @@ streamlit run app.py
 *Data Scientist | Machine Learning | Python*
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-levitoncarvalho-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/levitoncarvalho/)
-[![GitHub](https://img.shields.io/badge/GitHub-carvalholevis-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/carvalholevis)
-[![Email](https://img.shields.io/badge/Email-carvalholevis%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:carvalholevis@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-levitoncarvalho-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/levitoncarvalho)
+[![Email](https://img.shields.io/badge/Email-levitoncarvalho@icloud.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:levitoncarvalho@icloud.com)
 
 </div>
 
