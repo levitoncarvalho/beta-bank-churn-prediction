@@ -1,77 +1,142 @@
-# 🏦 Beta Bank Churn Prediction: From Data to Deployment
+# 🏦 Beta Bank Churn Prediction
+### *Turning Behavioral Data into Intelligent Customer Retention*
 
 <div align="center">
 
-[![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.2.2-orange.svg)](https://scikit-learn.org/)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://beta-bank-churn-prediction-carvalholevis.streamlit.app/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.2.2-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-Data%20Wrangling-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://beta-bank-churn-prediction-carvalholevis.streamlit.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-**[🚀 Explore the Interactive App](https://beta-bank-churn-prediction-carvalholevis.streamlit.app/)**  
-**[🐍 View Source Code](https://github.com/carvalholevis/beta-bank-churn-prediction)**
+<br>
+
+**[🚀 Try the Live App](https://beta-bank-churn-prediction-carvalholevis.streamlit.app/)** &nbsp;|&nbsp; **[📓 View Full Notebook](notebooks/01_beta_bank_analysis_and_modeling.ipynb)**
 
 </div>
 
 ---
 
-## 🎯 The Mission
+## 🧩 The Business Problem
 
-**Beta Bank** is facing a critical challenge: increasing customer churn.
+> *"Acquiring a new customer costs 5 to 25 times more than retaining an existing one."*
+> — Harvard Business Review
 
-Since retaining existing customers is significantly cheaper than acquiring new ones, the goal was to build a robust machine learning model to predict which customers are likely to leave, enabling proactive retention strategies.
+**Beta Bank** was facing a silent but devastating problem: gradual customer churn. Month after month, clients were leaving — and the business team only noticed after the damage was done.
 
-This project is a full end-to-end data science solution, from exploratory analysis and model optimization to a live, interactive demo.
+The strategic question was clear: **how do we act *before* a customer leaves?**
 
----
+The answer: build a machine learning model capable of identifying, in advance, which customers are at the highest risk of churning — enabling the bank to take proactive, personalized retention actions.
 
-## 📊 Results
+### Why Does This Matter?
 
-The final optimized **Random Forest model** exceeded the business target:
-
-| Metric       | Target  | Achieved |
-|--------------|---------|----------|
-| **F1-Score** | > 0.59  | **0.61 ✅** |
-| **AUC-ROC**  | —       | **0.85** |
-
----
-
-## 🧠 Data Science Workflow
-
-### 1. 🔎 Exploratory Data Analysis (EDA) & Data Preparation
-
-- Handled missing values in `Tenure` using median
-- Removed irrelevant features:
-  - `RowNumber`
-  - `CustomerId`
-  - `Surname`
-- Applied preprocessing:
-  - One-Hot Encoding (categorical)
-  - StandardScaler (numerical)
-- Addressed class imbalance:
-  - Used **Upsampling**
-  - More effective than `class_weight='balanced'`
+| Scenario | Impact |
+|---|---|
+| 🔴 No predictive model | The bank reacts *after* losing the customer |
+| 🟡 Weak model (F1 < 0.59) | Too many false negatives — at-risk customers go undetected |
+| 🟢 **Optimized model (F1 = 0.61, AUC-ROC = 0.85)** | **Reliable early identification of at-risk customers** |
 
 ---
 
-### 2. 🤖 Model Development & Optimization
+## 📊 Final Results
 
-- Algorithm: **Random Forest Classifier**
-- Hyperparameter tuning:
-  - Used `RandomizedSearchCV`
-  - 5-fold cross-validation
-  - Tested 100+ combinations
-- Evaluation metrics:
-  - Primary: **F1-score**
-  - Secondary: **AUC-ROC**
+<div align="center">
+
+### 🏆 The final model exceeded the business target
+
+</div>
+
+| Metric | Target | Result | Status |
+|---|---|---|---|
+| **F1-Score** (test set) | > 0.59 | **0.61** | ✅ Exceeded |
+| **AUC-ROC** (test set) | Benchmark | **0.85** | ✅ Strong |
+| **Algorithm** | — | Random Forest | — |
+| **Imbalance Technique** | — | Upsampling | — |
+
+> **An AUC-ROC of 0.85 means the model correctly distinguishes a churning customer from a retained one 85% of the time** — highly effective discrimination for targeted retention campaigns.
 
 ---
 
-### 3. 🚀 Deployment
+## 🧠 End-to-End Data Science Workflow
 
-- Modular project structure (`src/`)
-- Model saved using `joblib`
-- Interactive app built with **Streamlit**
-- Deployed on **Streamlit Community Cloud**
+```
+📥 Raw Data  →  🔎 EDA  →  🛠️ Preprocessing  →  ⚖️ Class Balancing  →  🤖 Modeling  →  🎯 Evaluation  →  🚀 Deployment
+```
+
+### 1. 🔎 Exploratory Data Analysis (EDA)
+
+Before any modeling, the data was thoroughly investigated:
+
+- **10,000 customer records** with 13 behavioral and demographic features
+- **Missing values in `Tenure`** (~2.7% of records) → imputed using median
+- Columns with no predictive value removed: `RowNumber`, `CustomerId`, `Surname`
+- **Critical finding:** the dataset is heavily imbalanced — only ~20.4% of customers churned (`Exited = 1`), which distorts simple accuracy metrics and demands specialized treatment
+
+**Key patterns discovered in EDA:**
+- Older customers churn significantly more
+- Customers with higher balances show elevated churn — suggesting migration to competitors with better rates
+- Customers in **Germany** churn at a much higher rate than France or Spain
+- **Inactive members** are far more likely to leave
+- Customers using **exactly 2 products** are the most loyal; 1 or 3-4 products correlate with higher churn
+
+**Feature Overview:**
+
+| Feature | Type | Description |
+|---|---|---|
+| `CreditScore` | Numerical | Customer credit score |
+| `Geography` | Categorical | Country of residence |
+| `Gender` | Categorical | Gender |
+| `Age` | Numerical | Customer age |
+| `Tenure` | Numerical | Years as a bank customer |
+| `Balance` | Numerical | Account balance |
+| `NumOfProducts` | Numerical | Number of banking products used |
+| `HasCrCard` | Binary | Owns a credit card (1=Yes, 0=No) |
+| `IsActiveMember` | Binary | Active member (1=Yes, 0=No) |
+| `EstimatedSalary` | Numerical | Estimated annual salary |
+
+---
+
+### 2. ⚖️ Handling Class Imbalance
+
+One of the core challenges of this project was the **class imbalance**. Two approaches were tested and compared:
+
+| Approach | F1-Score (Validation) | Notes |
+|---|---|---|
+| No balancing (baseline) | ~0.50 | Model biased toward the majority class |
+| `class_weight='balanced'` | ~0.57 | Improvement, but still below target |
+| **Upsampling (oversampling minority class)** | **~0.61** | **Best result — chosen technique** |
+
+**Why upsampling won:** Replicating minority-class examples in the training set forced the model to learn richer, more varied patterns from customers who actually churned — leading to better generalization on unseen data.
+
+---
+
+### 3. 🤖 Modeling & Optimization
+
+- **Algorithm:** `RandomForestClassifier` — chosen for its robustness with tabular data, resistance to overfitting, and interpretability via feature importance
+- **Optimization:** `RandomizedSearchCV` with 5-fold cross-validation, exploring 100+ hyperparameter combinations
+- **Tuned parameters:** `n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`
+- **Primary metric:** F1-Score | **Secondary metric:** AUC-ROC
+
+---
+
+### 4. 🎯 Final Test Set Evaluation
+
+The final model was evaluated on data **never seen during training**:
+
+```
+F1-Score  = 0.61  ✅  (target: > 0.59)
+AUC-ROC   = 0.85  ✅
+```
+
+The ROC curve with AUC = 0.85 demonstrates strong discriminative power — the model reliably separates customers who will leave from those who will stay, across all classification thresholds.
+
+---
+
+### 5. 🚀 Deployment
+
+The trained model was serialized with `joblib` and deployed as an interactive **Streamlit web app**, allowing the bank's team to input customer data and receive real-time churn predictions.
+
+**[➡️ Try the live app here](https://beta-bank-churn-prediction-carvalholevis.streamlit.app/)**
 
 ---
 
@@ -79,86 +144,93 @@ The final optimized **Random Forest model** exceeded the business target:
 
 ```
 beta-bank-churn-prediction/
-├── config.py
-├── data/
-│   └── Churn.csv
-├── models/
-│   ├── best_model.pkl
-│   └── scaler.pkl
-├── notebooks/
-│   └── 01_beta_bank_analysis_and_modeling.ipynb
-├── src/
-│   ├── utils.py
-│   ├── data_preparation.py
-│   ├── model_training.py
-│   └── evaluation.py
-├── app.py
-├── train_and_save.py
-├── requirements.txt
-├── LICENSE
-└── README.md
+│
+├── 📓 notebooks/
+│   └── 01_beta_bank_analysis_and_modeling.ipynb   # Full analysis + modeling
+│
+├── 🤖 models/
+│   ├── best_model.pkl                              # Serialized trained model
+│   └── scaler.pkl                                  # Serialized scaler
+│
+├── 🐍 src/
+│   ├── data_preparation.py                         # Preprocessing pipeline
+│   ├── model_training.py                           # Training & optimization
+│   ├── evaluation.py                               # Metrics & visualizations
+│   └── utils.py                                    # Helper functions
+│
+├── 🌐 app.py                                       # Streamlit interactive app
+├── 🔁 train_and_save.py                            # Model retraining script
+├── ⚙️ config.py                                    # Centralized configuration
+├── 📦 requirements.txt
+└── 📄 README.md
 ```
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
-
-```
+```bash
+# 1. Clone the repository
 git clone https://github.com/carvalholevis/beta-bank-churn-prediction.git
 cd beta-bank-churn-prediction
-```
 
-### 2. Create virtual environment
-
-```
+# 2. Create and activate virtual environment
 python -m venv venv
-source venv/bin/activate
-```
+source venv/bin/activate        # Linux/Mac
+venv\Scripts\activate           # Windows
 
-Windows:
-
-```
-venv\Scripts\activate
-```
-
-### 3. Install dependencies
-
-```
+# 3. Install dependencies
 pip install -r requirements.txt
-```
 
-### 4. Download dataset
+# 4. Download the dataset and place it in data/
+# Link: https://practicum-content.s3.us-west-1.amazonaws.com/datasets/Churn.csv
 
-Download the dataset and place it inside the `data/` folder:
-
-[![Download Dataset](https://img.shields.io/badge/Dataset-Download-blue?style=for-the-badge&logo=databricks&logoColor=white)](https://practicum-content.s3.us-west-1.amazonaws.com/datasets/Churn.csv)
-
-### 5. Train the model
-
-```
+# 5. Train the model
 python train_and_save.py
-```
 
-### 6. Run the app
-
-```
+# 6. Launch the app
 streamlit run app.py
 ```
 
 ---
 
-## 👨‍💻 About the Author
+## 🛠️ Tech Stack
+
+| Category | Tools |
+|---|---|
+| **Language** | Python 3.9+ |
+| **Data Manipulation** | Pandas, NumPy |
+| **Machine Learning** | Scikit-Learn |
+| **Visualization** | Matplotlib, Seaborn |
+| **Serialization** | Joblib |
+| **Deployment** | Streamlit, Streamlit Community Cloud |
+
+---
+
+## 💡 Key Technical Takeaways
+
+- **Class imbalance is a real threat to model quality** — simple accuracy is a misleading metric when classes are disproportionate. F1-Score and AUC-ROC are far more appropriate for churn prediction.
+- **Upsampling outperformed `class_weight`** in this scenario — generating additional minority-class examples allowed the model to learn more diverse churning patterns.
+- **Random Forest + RandomizedSearchCV** proved to be an efficient combination: broad hyperparameter space exploration without excessive computational cost.
+- The **modular code structure** (`src/`) promotes maintainability, testability, and scalability — a best practice for production ML systems.
+
+---
+
+## 👨‍💻 Author
+
+<div align="center">
 
 **Leviton Lima Carvalho**
+*Data Scientist | Machine Learning | Python*
 
-- 💼 LinkedIn: https://www.linkedin.com/in/levitoncarvalho/
-- 🐙 GitHub: https://github.com/carvalholevis
-- ✉️ Email: carvalholevis@gmail.com
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-levitoncarvalho-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/levitoncarvalho/)
+[![GitHub](https://img.shields.io/badge/GitHub-carvalholevis-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/carvalholevis)
+[![Email](https://img.shields.io/badge/Email-carvalholevis%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:carvalholevis@gmail.com)
+
+</div>
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for more details.
