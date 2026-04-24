@@ -17,6 +17,10 @@
 
 ---
 
+> ⚠️ **Disclaimer:** Beta Bank is a **fictional institution** created exclusively for academic and portfolio purposes. This project was developed as part of a Data Science training program and is intended solely to demonstrate technical skills in machine learning, data analysis, and model deployment. No real financial institution, customer data, or business relationship is represented here.
+
+---
+
 ## 🧩 The Business Problem
 
 > *"Acquiring a new customer costs 5 to 25 times more than retaining an existing one."*
@@ -181,9 +185,6 @@ venv\Scripts\activate           # Windows
 
 # 3. Install dependencies
 pip install -r requirements.txt
-
-# 4. Download the dataset and place it in data/
-# Link: https://practicum-content.s3.us-west-1.amazonaws.com/datasets/Churn.csv
 
 # 5. Train the model
 python train_and_save.py
