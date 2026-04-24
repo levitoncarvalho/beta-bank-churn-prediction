@@ -11,7 +11,7 @@
 
 <br>
 
-**[🚀 Try the Live App](https://beta-bank-churn-prediction-carvalholevis.streamlit.app/)** &nbsp;|&nbsp; **[📓 View Full Notebook](notebooks/01_beta_bank_analysis_and_modeling.ipynb)**
+**[🚀 Try the Live App](https://beta-bank-churn-prediction-carvalholevis.streamlit.app/)** &nbsp;|&nbsp; **[📓 View Full Notebook](https://github.com/levitoncarvalho/beta-bank-churn-prediction/blob/main/notebooks/exploration_v1.ipynb)**
 
 </div>
 
