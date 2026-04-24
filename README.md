@@ -146,27 +146,32 @@ The trained model was serialized with `joblib` and deployed as an interactive **
 
 ## 🗂️ Project Structure
 
-```
+```text
 beta-bank-churn-prediction/
 │
+├── 📂 data/
+│   └── 📊 Churn.csv                                # Raw dataset
+│
 ├── 📓 notebooks/
-│   └── 01_beta_bank_analysis_and_modeling.ipynb   # Full analysis + modeling
+│   └── 📓 exploration_v1.ipynb                     # Full analysis + modeling
 │
 ├── 🤖 models/
-│   ├── best_model.pkl                              # Serialized trained model
-│   └── scaler.pkl                                  # Serialized scaler
+│   ├── ⚙️ best_model.pkl                           # Serialized trained model
+│   └── ⚙️ scaler.pkl                               # Serialized scaler
 │
 ├── 🐍 src/
-│   ├── data_preparation.py                         # Preprocessing pipeline
-│   ├── model_training.py                           # Training & optimization
-│   ├── evaluation.py                               # Metrics & visualizations
-│   └── utils.py                                    # Helper functions
+│   ├── 🐍 __init__.py                              # Package initialization
+│   ├── 🐍 data_preparation.py                      # Preprocessing pipeline
+│   ├── 🐍 model_training.py                        # Training & optimization
+│   └── 🐍 utils.py                                 # Helper functions
 │
 ├── 🌐 app.py                                       # Streamlit interactive app
-├── 🔁 train_and_save.py                            # Model retraining script
 ├── ⚙️ config.py                                    # Centralized configuration
-├── 📦 requirements.txt
-└── 📄 README.md
+├── 🔁 train_and_save.py                            # Model retraining script
+├── 📦 requirements.txt                             # Python dependencies
+├── 🚫 .gitignore                                   # Ignored files and folders
+├── ⚖️ LICENSE                                      # MIT License
+└── 📄 README.md                                    # Project documentation
 ```
 
 ---
